@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My ToDo List</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to Your ToDo List</h2>
+        <form action="/tasks/add" method="post">
+            <input type="text" name="title" placeholder="Task Title" required>
+            <input type="text" name="description" placeholder="Description">
+            <button type="submit">Add Task</button>
+        </form>
+        <ul id="taskList">
+            <!-- Task list rendered via Thymeleaf -->
+            <th:block th:each="task : ${tasks}">
+                <li>
+                    <span th:text="${task.title}"></span> -
+                    <span th:text="${task.description}"></span>
+                    <a th:href="@{'/tasks/delete/' + ${task.id}}">Delete</a>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+</body>
+</html>
